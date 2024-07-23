@@ -1,5 +1,5 @@
 // 流程条件比较设置选项
-export const CompareOptions = {
+export const CompareOptions: any = {
   number: [
     { name: '大于', symbol: 'GT' },
     { name: '小于', symbol: 'LT' },
@@ -44,39 +44,39 @@ export const CompareOptions = {
 }
 
 // 流程条件支持对象
-export const ProcessCondition = {
+export const ProcessCondition: any = {
   INITIATOR: {
     Org: {
       type: 'org',
-      desc(cd) {
-        return `发起人${getCdName(cd)} ${(cd.compareVal || []).map(v => v.name).join('、')}`
+      desc(cd: any) {
+        return `发起人${getCdName(cd)} ${(cd.compareVal || []).map((v: any) => v.name).join('、')}`
       },
     },
     Role: {
       type: 'role',
-      desc(cd) {
-        return `发起人${getCdName(cd)} ${cd.compareVal.map(v => v.name).join('、')}`
+      desc(cd: any) {
+        return `发起人${getCdName(cd)} ${cd.compareVal.map((v: any) => v.name).join('、')}`
       },
     },
   },
   FORM: {
     TextInput: {
       type: 'string',
-      desc(cd) {
+      desc(cd: any) {
         return `${cd.name[1]} ${getCdName(cd)} ${cd.compareVal.join('、')}`
       },
     },
     NumberInput: {
       type: 'number',
-      desc(cd) {
+      desc(cd: any) {
         return `${cd.name[1]} ${getCdName(cd)} ${cd.compareVal.join('、')}`
       },
     },
   },
 }
 
-function getCdName(cd) {
-  const options = CompareOptions[ProcessCondition[cd.group][cd.type].type]
-  const index = options.findIndex(v => v.symbol === cd.compare)
+function getCdName(cd: any) {
+  const options: any = CompareOptions[ProcessCondition[cd.group][cd.type].type]
+  const index = options.findIndex((v: any) => v.symbol === cd.compare)
   return (options[index] || {}).name || '?'
 }

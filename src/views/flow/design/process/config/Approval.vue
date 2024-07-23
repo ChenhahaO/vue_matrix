@@ -1,9 +1,7 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
 import nodeMixin from '../NodeMixin'
-import WOrgPicker from '../../../common/WOrgPicker.vue'
 import FormPermConf from '../../../admin/config/FormPermConf.vue'
-import WOrgTags from '../../../common/WOrgTags.vue'
 
 const props = defineProps({
   ...nodeMixin.props,

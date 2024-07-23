@@ -1,10 +1,11 @@
-<script setup>
+<script setup lang="ts">
+import { ArrowLeft, FolderChecked, Promotion } from '@element-plus/icons-vue'
 import FromDesigner from '../design/form/FormDesigner.vue'
-import ProcessDesigner from './ProcessDesigner.vue'
 import BaseSetting from './BaseSetting.vue'
 import PlusSetting from './PlusSetting.vue'
+import ProcessDesigner from './ProcessDesigner.vue'
 
-const _this = getCurrentInstance()
+const _this: any = getCurrentInstance()
 const active = ref('BASE')
 const validVisible = ref(false)
 // 几个设置页面的ref
@@ -14,15 +15,15 @@ const validRefs = ref([
   { _ref: 'form', name: '表单设计', status: '' },
   { _ref: 'process', name: '流程设计', status: '' },
   { _ref: 'plus', name: '扩展设置', status: '' },
-])
+] as any)
 // 校验结果
-const validResult = ref({})
+const validResult = ref({} as any)
 
 const activePd = computed(() => {
   return active.value === 'PROCESS'
 })
 
-const validIcon = computed(() => {
+const validIcon: any = computed(() => {
   if (!validResult.value.finished) {
     return 'loading'
   }
@@ -36,13 +37,13 @@ const validIcon = computed(() => {
 // 错误信息
 const errTitle = computed(() => {
   if (validResult.value.finished && !validResult.value.success) {
-    return (`${validResult.value.title} (${validResult.value.errs.length}项错误)`)
+    return `${validResult.value.title} (${validResult.value.errs.length}项错误)`
   }
   return validResult.value.title
 })
 
 // 设计器数据
-const designData = reactive({
+const designData: any = reactive({
   name: '未命名流程',
   icon: {
     name: 'file-icons:omnigraffle',
@@ -63,7 +64,7 @@ const designData = reactive({
   remark: null,
 })
 
-function switchMenu(index) {
+function switchMenu(index: any) {
   active.value = index
 }
 
@@ -84,7 +85,7 @@ async function validate() {
     action: '去处理',
     desc: '正在检查设置项',
   }
-  validRefs.value.forEach(v => v.status = '')
+  validRefs.value.forEach((v: any) => (v.status = ''))
   for (let i = 0; i < validRefs.value.length; i++) {
     validIndex.value = i
     // 阻塞一下
@@ -95,19 +96,21 @@ async function validate() {
 }
 
 function publish() {
-  validate().then(() => {
-    reloadValidResult(true)
-  }).catch((errs) => {
-    reloadValidResult(false)
-    validRefs.value[validIndex.value].status = 'error'
-    console.log(errs)
-    if (Array.isArray(errs)) {
-      validResult.value.errs.push(...errs)
-    }
-  })
+  validate()
+    .then(() => {
+      reloadValidResult(true)
+    })
+    .catch((errs) => {
+      reloadValidResult(false)
+      validRefs.value[validIndex.value].status = 'error'
+      console.log(errs)
+      if (Array.isArray(errs)) {
+        validResult.value.errs.push(...errs)
+      }
+    })
 }
 // 重置校验结果
-function reloadValidResult(isSuccess) {
+function reloadValidResult(isSuccess: any) {
   validResult.value.finished = true
   validResult.value.success = isSuccess
   validResult.value.desc = ''
@@ -142,12 +145,21 @@ function doAfter() {
   <div class="w-designer">
     <el-container>
       <el-header style="padding: 0">
-        <el-menu :default-active="active" class="w-designer-menu" mode="horizontal" @select="switchMenu">
+        <el-menu
+          :default-active="active"
+          class="w-designer-menu"
+          mode="horizontal"
+          @select="switchMenu"
+        >
           <div>
-            <el-button icon="ArrowLeft" circle />
+            <el-button :icon="ArrowLeft" circle />
             <iconify
-              :icon="designData.icon.name" class="w-process-icon"
-              :style="{ background: designData.icon.bgc, color: designData.icon.color }"
+              :icon="designData.icon.name"
+              class="w-process-icon"
+              :style="{
+                background: designData.icon.bgc,
+                color: designData.icon.color,
+              }"
             />
             <el-text>{{ designData.name }}</el-text>
           </div>
@@ -164,33 +176,65 @@ function doAfter() {
             ④ 扩展设置
           </el-menu-item>
           <div>
-            <el-button icon="FolderChecked" round @click="doSave">
+            <el-button :icon="FolderChecked" round @click="doSave">
               保存
             </el-button>
-            <el-button icon="Promotion" type="primary" round @click="publish">
+            <el-button :icon="Promotion" type="primary" round @click="publish">
               发布
             </el-button>
           </div>
         </el-menu>
       </el-header>
-      <el-main class="w-designer-container" :class="{ 'w-no-padding': active === 'FORM' }">
-        <BaseSetting v-show="active === 'BASE'" ref="base" v-model="designData" />
-        <FromDesigner v-show="active === 'FORM'" ref="form" v-model="designData.formConf" />
-        <ProcessDesigner
-          v-show="activePd" ref="process" v-model="designData.process"
-          :form-items="designData.formConf.components" :active="activePd"
+      <el-main
+        class="w-designer-container"
+        :class="{ 'w-no-padding': active === 'FORM' }"
+      >
+        <BaseSetting
+          v-show="active === 'BASE'"
+          ref="base"
+          v-model="designData"
         />
-        <PlusSetting v-show="active === 'PLUS'" ref="plus" v-model="designData" />
+        <FromDesigner
+          v-show="active === 'FORM'"
+          ref="form"
+          v-model="designData.formConf"
+        />
+        <ProcessDesigner
+          v-show="activePd"
+          ref="process"
+          v-model="designData.process"
+          :form-items="designData.formConf.components"
+          :active="activePd"
+        />
+        <PlusSetting
+          v-show="active === 'PLUS'"
+          ref="plus"
+          v-model="designData"
+        />
       </el-main>
     </el-container>
-    <w-dialog v-model="validVisible" :border="false" width="550" title="表单流程设计校验" :show-footer="false">
+    <w-dialog
+      v-model="validVisible"
+      :border="false"
+      width="550"
+      title="表单流程设计校验"
+      :show-footer="false"
+    >
       <el-steps align-center :active="validIndex" finish-status="success">
         <el-step
-          v-for="(step, i) in validRefs" :key="i" :title="step.name" :icon="step.icon" :status="step.status"
+          v-for="(step, i) in validRefs"
+          :key="i"
+          :title="step.name"
+          :icon="step.icon"
+          :status="step.status"
           :description="step.description"
         />
       </el-steps>
-      <el-result :icon="validIcon" :title="errTitle" :sub-title="validResult.desc">
+      <el-result
+        :icon="validIcon"
+        :title="errTitle"
+        :sub-title="validResult.desc"
+      >
         <template #icon>
           <el-icon v-if="!validResult.finished" size="30" class="is-loading">
             <Loading />
@@ -199,7 +243,12 @@ function doAfter() {
         <template #sub-title>
           <el-scrollbar v-if="validResult.errs.length > 0">
             <div class="w-valid-err-info">
-              <el-text v-for="(err, i) in validResult.errs" :key="`${i}_err`" tag="div" truncated>
+              <el-text
+                v-for="(err, i) in validResult.errs"
+                :key="`${i}_err`"
+                tag="div"
+                truncated
+              >
                 <el-icon>
                   <Warning />
                 </el-icon>
@@ -209,7 +258,11 @@ function doAfter() {
           </el-scrollbar>
         </template>
         <template #extra>
-          <el-button v-if="validResult.finished" type="primary" @click="doAfter">
+          <el-button
+            v-if="validResult.finished"
+            type="primary"
+            @click="doAfter"
+          >
             {{ validResult.action }}
           </el-button>
         </template>
@@ -237,6 +290,8 @@ function doAfter() {
 
       .w-process-icon {
         margin: 0 10px 0 20px;
+        width: 36px;
+        height: 36px;
       }
     }
 

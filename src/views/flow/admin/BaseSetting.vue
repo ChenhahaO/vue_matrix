@@ -1,4 +1,6 @@
-<script setup>
+<script setup lang="ts">
+import { Plus } from '@element-plus/icons-vue'
+
 const form = ref()
 
 defineExpose({ validate })
@@ -8,9 +10,12 @@ const groupList = ref([{ id: 222, name: '测试' }])
 
 function validate() {
   return new Promise((resolve, reject) => {
-    form.value.validate().then(() => resolve()).catch((err) => {
-      reject(Object.keys(err).map(v => err[v][0].message))
-    })
+    form.value
+      .validate()
+      .then(() => resolve())
+      .catch((err) => {
+        reject(Object.keys(err).map(v => err[v][0].message))
+      })
   })
 }
 
@@ -19,9 +24,7 @@ const rules = {
     { required: true, message: '请设置流程表单名称', trigger: 'blur' },
     { min: 2, max: 20, message: '流程表单名称长度在2~20', trigger: 'blur' },
   ],
-  groupId: [
-    { required: true, message: '请设置流程表单分组', trigger: 'blur' },
-  ],
+  groupId: [{ required: true, message: '请设置流程表单分组', trigger: 'blur' }],
 }
 
 const iconList = [
@@ -100,7 +103,8 @@ const iconList = [
     <el-form ref="form" :rules="rules" :model="_value" label-position="top">
       <el-form-item prop="icon" label="设置图标">
         <iconify
-          :icon="_value.icon.name" class="w-process-icon"
+          :icon="_value.icon.name"
+          class="w-process-icon"
           :style="{ background: _value.icon.bgc, color: _value.icon.color }"
         />
         <div style="margin: 0 40px">
@@ -111,11 +115,22 @@ const iconList = [
           <el-text>选择图标：</el-text>
           <el-popover placement="bottom-start" width="402" trigger="click">
             <div class="w-icons">
-              <iconify v-for="ico in iconList" :key="ico" class="w-icons-ico" :icon="ico" @click.native="_value.icon.name = ico" />
-              <div v-for="i in 12" style="width: 31px; height: 0;" />
+              <iconify
+                v-for="ico in iconList"
+                :key="ico"
+                class="w-icons-ico"
+                :icon="ico"
+                @click.native="_value.icon.name = ico"
+              />
+              <div v-for="i in 12" :key="i" style="width: 31px; height: 0" />
             </div>
             <template #reference>
-              <iconify slot="reference" class="w-p-icon" style="padding: 0" :icon="_value.icon.name" />
+              <iconify
+                slot="reference"
+                class="w-p-icon"
+                style="padding: 0"
+                :icon="_value.icon.name"
+              />
             </template>
           </el-popover>
         </div>
@@ -124,15 +139,35 @@ const iconList = [
         <el-input v-model="_value.name" placeholder="请设置流程名" />
       </el-form-item>
       <el-form-item prop="groupId" required label="流程分组">
-        <el-select v-model="_value.groupId" style="width: calc(100% - 140px); padding-right: 20px;" placeholder="请选择流程分组">
-          <el-option v-for="group in groupList" :value="group.id" :label="group.name" />
+        <el-select
+          v-model="_value.groupId"
+          style="width: calc(100% - 140px); padding-right: 20px"
+          placeholder="请选择流程分组"
+        >
+          <el-option
+            v-for="(group, index) in groupList"
+            :key="index"
+            :value="group.id"
+            :label="group.name"
+          />
         </el-select>
-        <el-button style="width: 120px; float: right" type="primary" icon="plus">
+        <el-button
+          style="width: 120px; float: right"
+          type="primary"
+          :icon="Plus"
+        >
           新建分组
         </el-button>
       </el-form-item>
       <el-form-item label="备注说明">
-        <el-input v-model="_value.remark" show-word-limit maxlength="128" :rows="3" type="textarea" placeholder="流程备注说明信息" />
+        <el-input
+          v-model="_value.remark"
+          show-word-limit
+          maxlength="128"
+          :rows="3"
+          type="textarea"
+          placeholder="流程备注说明信息"
+        />
       </el-form-item>
     </el-form>
   </el-main>
@@ -145,6 +180,10 @@ const iconList = [
   background-color: white;
   width: 650px;
   min-height: calc(100vh - 100px);
+  .w-process-icon {
+    width: 36px;
+    height: 36px;
+  }
 }
 
 .w-p-icon {

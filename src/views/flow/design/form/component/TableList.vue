@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang='ts'>
 import { VueDraggable } from 'vue-draggable-plus'
 import { computed } from 'vue'
 import FormComponentMixin from '../FormComponentMixin'
@@ -166,6 +166,8 @@ function copyRow(row) {
   overflow: hidden;
 
   i {
+    width: 24px;
+    height: 24px;
     padding: 5px;
     cursor: pointer;
     background: var(--el-color-primary);

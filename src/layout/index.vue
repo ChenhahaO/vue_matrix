@@ -44,21 +44,21 @@ function handleClickOutside() {
 
 <template>
   <div :class="classObj" class="app-wrapper">
-    <div
+    <!-- <div
       v-if="device === 'mobile' && sidebar.opened"
       class="drawer-bg"
       @click="handleClickOutside"
-    />
-    <Sidebar
+    /> -->
+    <!-- <Sidebar
       class="sidebar-container"
       :class="mobileAdaptationcss"
       :style="{ left: isQiankun ? '60px' : '0px' }"
-    />
+    /> -->
     <div :class="{ hasTagsView: needTagsView }" class="main-container">
-      <div :class="{ 'fixed-header': fixedHeader }">
+      <!-- <div :class="{ 'fixed-header': fixedHeader }">
         <Navbar />
         <TagsView v-if="needTagsView" />
-      </div>
+      </div> -->
       <AppMain />
     </div>
   </div>

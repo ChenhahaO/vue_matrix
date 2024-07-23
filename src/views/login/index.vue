@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { Lock, User } from '@element-plus/icons-vue'
 import router from '@/router'
 import useStore from '@/store'
 import type { LoginForm } from '@/api/auth/types'

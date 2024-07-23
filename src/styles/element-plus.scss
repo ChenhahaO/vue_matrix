@@ -4,7 +4,7 @@
   --el-color-primary-dark: #0d84ff;
   // element plus 2.1.0 禁用文本色值和正常文本色值无法区分问题
   --el-text-color-disabled: #ccc;
-  --el-menu-active-color: rgb(231, 244, 255) !important;
+  --el-menu-active-color: #316eff !important;
 }
 
 // 覆盖 element-plus 的样式
@@ -50,13 +50,13 @@
   display: table-cell !important;
 }
 
-.el-menu-item.is-active {
-  background-color: #5482ee !important;
-}
+// .el-menu-item.is-active {
+//   background-color: #5482ee !important;
+// }
 
-.el-menu--inline {
-  background-color: #5482ee !important;
-}
+// .el-menu--inline {
+//   background-color: #5482ee !important;
+// }
 
 // 解决el-form的label标签有时候是div有时候是label 导致有时label字体不会变粗的情况
 .el-form-item__label {

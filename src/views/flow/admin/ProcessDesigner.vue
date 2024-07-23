@@ -1,4 +1,5 @@
-<script setup>
+<script setup lang="ts">
+import { Minus, Plus } from '@element-plus/icons-vue'
 import ProcessRender from '../design/process/ProcessRender.vue'
 import nodeType, { NodeComponentConfigs } from '../design/process/ProcessNodes'
 
@@ -22,7 +23,7 @@ const props = defineProps({
   },
 })
 
-const processData = defineModel()
+const processData:any = defineModel()
 
 // 加载的时候判断，赋默认值
 onBeforeMount(() => {
@@ -35,7 +36,7 @@ defineExpose({ validate })
 // 缩放比例
 const zoom = ref(100)
 // 选中的节点
-const activeNode = ref({})
+const activeNode = ref({} as any)
 const showInput = ref(false)
 const nodeConfVisible = ref(false)
 // 流程图ref
@@ -48,7 +49,7 @@ const configWidth = computed(() => {
   return activeNode.value.type === 'Exclusive' ? 600 : 500
 })
 
-function selectNode(node) {
+function selectNode(node: any) {
   activeNode.value = node
   if (NodeComponentConfigs[activeNode.value.type]) {
     nodeConfVisible.value = true
@@ -59,7 +60,7 @@ function selectNode(node) {
   console.log('选中', node)
 }
 
-function doZoom(sc) {
+function doZoom(sc: any) {
   if ((zoom.value > 30 && zoom.value < 150)
     || (zoom.value <= 30 && sc > 0)
     || (zoom.value >= 150 && sc < 0)) {
@@ -70,21 +71,21 @@ function doZoom(sc) {
   }
 }
 
-function keyDown(event) {
+function keyDown(event: any) {
   if (event.ctrlKey) {
     ctrlPressed = true
     document.addEventListener('wheel', mouseWheel, { passive: false })
   }
 }
 
-function keyUp(event) {
+function keyUp(event: any) {
   if (event.key === 'Control') {
     ctrlPressed = false
     document.removeEventListener('wheel', mouseWheel)
   }
 }
 
-function mouseWheel(event) {
+function mouseWheel(event: any) {
   if (ctrlPressed && props.active) {
     // 阻止默认的缩放行为
     event.preventDefault()
@@ -114,9 +115,9 @@ function validate() {
   <div class="w-process-designer">
     <div class="w-p-d-operation">
       <div class="w-p-d-operation-zoom">
-        <el-button icon="Minus" circle @click="doZoom(-5)" />
+        <el-button :icon="Minus" circle @click="doZoom(-5)" />
         <span>{{ zoom }}%</span>
-        <el-button icon="Plus" circle @click="doZoom(5)" />
+        <el-button :icon="Plus" circle @click="doZoom(5)" />
       </div>
     </div>
     <ProcessRender ref="processRender" v-model="processData" :style="`transform: scale(${zoom / 100})`" :readonly="false" @select="selectNode" />

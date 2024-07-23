@@ -2,8 +2,6 @@
 import { computed, ref } from 'vue'
 import nodeMixin from '../NodeMixin'
 import FormPermConf from '../../../admin/config/FormPermConf.vue'
-import WOrgTags from '../../../common/WOrgTags.vue'
-import WOrgPicker from '../../../common/WOrgPicker.vue'
 
 const props = defineProps({
   ...nodeMixin.props,

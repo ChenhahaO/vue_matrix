@@ -137,19 +137,20 @@ function validate() {
       <div class="w-form-d-toolbar">
         <div>
           <el-tooltip effect="dark" content="撤销" placement="top">
-            <iconify icon="ooui:undo-ltr" />
+            <iconify icon="ooui:undo-ltr" class="w-process-icon" />
           </el-tooltip>
           <el-tooltip effect="dark" content="重做" placement="top">
-            <iconify icon="ooui:undo-rtl" />
+            <iconify icon="ooui:undo-rtl" class="w-process-icon" />
           </el-tooltip>
         </div>
         <div>
           <el-tooltip effect="dark" content="电脑端" placement="top">
-            <iconify icon="mi:computer" :class="{ 'w-f-d-t-active': pcMode }" />
+            <iconify icon="mi:computer" class="w-process-icon" :class="{ 'w-f-d-t-active': pcMode }" />
           </el-tooltip>
           <el-tooltip effect="dark" content="手机端" placement="top">
             <iconify
               icon="mingcute:cellphone-line"
+              class="w-process-icon"
               :class="{ 'w-f-d-t-active': !pcMode }"
             />
           </el-tooltip>
@@ -338,7 +339,7 @@ function validate() {
   padding: 10px;
   border-radius: 10px;
   background: white;
-  width: 110px;
+  width: 120px;
   border: 1px solid white;
   margin-bottom: 5px;
   color: var(--el-text-color-primary);
@@ -368,6 +369,7 @@ function validate() {
   }
 
   & > div {
+    display: flex;
     color: #989898;
     font-size: medium;
 

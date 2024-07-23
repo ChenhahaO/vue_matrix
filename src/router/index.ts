@@ -29,6 +29,11 @@ export const constantRoutes: Array<RouteRecordRaw> = [
     meta: { hidden: true },
   },
   {
+    path: '/thirdLogin',
+    component: () => import('@/views/thirdLogin/index.vue'),
+    meta: { hidden: true },
+  },
+  {
     path: '/',
     component: Layout,
     redirect: '/matrix_agent/vue',

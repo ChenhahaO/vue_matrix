@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { Plus } from '@element-plus/icons-vue'
 import Nodes from '../../ProcessNodes'
 
 defineEmits(['insertNode'])
@@ -15,7 +16,7 @@ const nodeList = Object.keys(Nodes)
 <template>
   <el-popover width="450" title="请选择流程节点" placement="right-start" trigger="click">
     <template #reference>
-      <el-button type="primary" icon="plus" circle style="z-index: 1;" />
+      <el-button type="primary" :icon="Plus" circle style="z-index: 1;" />
     </template>
     <div class="w-node-options">
       <div v-for="node in nodeList" :key="node.type" @click="$emit('insertNode', node.type)">
