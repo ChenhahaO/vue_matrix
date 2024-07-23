@@ -78,7 +78,7 @@ watch(enableEdit, () => {
 
 <style scoped lang="scss">
 .w-p-node {
-  width: @node-width;
+  width: $node-width;
   margin-bottom: 8px;
   position: relative;
 
@@ -120,12 +120,12 @@ watch(enableEdit, () => {
 
         & > div {
           margin-left: 3px;
-          width: calc(@node-width - 50px);
+          width: calc($node-width - 50px);
         }
       }
 
       input {
-        width: calc(@node-width - 50px);
+        width: calc($node-width - 50px);
         border: none;
         border-radius: 5px;
 
@@ -164,26 +164,26 @@ watch(enableEdit, () => {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: @node-line-len;
+    height: $node-line-len;
 
     &:before {
       position: absolute;
       content: '';
-      width: @node-line-width;
-      height: @node-line-len;
-      background: @node-line-color;
+      width: $node-line-width;
+      height: $node-line-len;
+      background: $node-line-color;
     }
 
     &:after {
       content: '';
       position: absolute;
-      top: @node-line-len;
+      top: $node-line-len;
       left: 50%;
       transform: translateX(-50%);
       width: 0;
       border-style: solid;
       border-width: 8px 6px 4px;
-      border-color: @node-line-color transparent transparent;
+      border-color: $node-line-color transparent transparent;
     }
   }
 }

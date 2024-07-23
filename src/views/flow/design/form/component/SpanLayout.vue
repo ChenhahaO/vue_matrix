@@ -1,7 +1,7 @@
 <script setup>
 import { VueDraggable } from 'vue-draggable-plus'
 import { computed, onBeforeMount, ref, watch } from 'vue'
-import FormComponentMixin from '../FormComponentMixin.js'
+import FormComponentMixin from '../FormComponentMixin'
 import FormComponent from './FormComponent.vue'
 
 const props = defineProps({
@@ -73,7 +73,7 @@ watch(() => props.config.props.number, reloadSpan)
 :deep(.w-f-cp-ct) {
   width: 100%;
   min-height: 50px;
-  background-color: @main-bgc;
+  background-color: $main-bgc;
 }
 
 .w-f-cp-select {

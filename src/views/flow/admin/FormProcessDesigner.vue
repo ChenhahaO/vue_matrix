@@ -220,7 +220,7 @@ function doAfter() {
 
 <style lang="scss" scoped>
 .w-designer {
-  background: @main-bgc;
+  background: $main-bgc;
 
   .w-designer-menu {
     display: flex;
@@ -264,7 +264,7 @@ function doAfter() {
     padding: 2px 5px;
     border-radius: 5px;
     margin: 2px;
-    background: @theme-aside-bgc;
+    background: $theme-aside-bgc;
   }
 }
 </style>

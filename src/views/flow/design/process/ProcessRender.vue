@@ -97,7 +97,7 @@ function validate() {
   .w-process-end {
     padding: 10px;
     border-radius: 5px;
-    background: @node-line-color;
+    background: $node-line-color;
   }
 }
 </style>

@@ -2,7 +2,7 @@
  * 需要创建新的节点，统一在本js内进行配置
  */
 import { defineAsyncComponent } from 'vue'
-import { getRandNodeId } from '@/utils/ProcessUtil.js'
+import { getRandNodeId } from '@/utils/ProcessUtil'
 
 const Nodes: any = import.meta.glob('./node/*.vue')
 const NodeConfigs: any = import.meta.glob('./config/*.vue')

@@ -1,6 +1,6 @@
 <script setup>
 import { computed } from 'vue'
-import FormComponentMixin from '../FormComponentMixin.js'
+import FormComponentMixin from '../FormComponentMixin'
 
 const props = defineProps({
   ...FormComponentMixin.props,

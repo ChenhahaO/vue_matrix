@@ -2,7 +2,7 @@
 import { computed, ref } from 'vue'
 import nodeMixin from '../NodeMixin'
 import BranchNode from './base/BranchNode.vue'
-import { ProcessCondition } from '@/utils/ConditionCompare.js'
+import { ProcessCondition } from '@/utils/ConditionCompare'
 
 const props = defineProps({
   ...nodeMixin.props,

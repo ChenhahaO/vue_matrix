@@ -90,7 +90,7 @@ watch(enableEdit, () => {
 
 <style scoped lang="scss">
 .w-p-node {
-  width: @node-width;
+  width: $node-width;
   margin-bottom: 8px;
   position: relative;
 
@@ -126,7 +126,7 @@ watch(enableEdit, () => {
       height: 100%;
 
       &:hover {
-        background: @node-line-color;
+        background: $node-line-color;
       }
     }
 
@@ -163,13 +163,13 @@ watch(enableEdit, () => {
 
         & > div {
           margin-left: 3px;
-          width: calc(@node-width - 85px);
+          width: calc($node-width - 85px);
         }
       }
 
       input {
-        width: calc(@node-width - 85px);
-        border: 1px solid @node-line-color;
+        width: calc($node-width - 85px);
+        border: 1px solid $node-line-color;
         border-radius: 5px;
 
         &:focus {
@@ -208,26 +208,26 @@ watch(enableEdit, () => {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: @node-line-len;
+    height: $node-line-len;
 
     &:before {
       position: absolute;
       content: '';
       width: 2px;
-      height: @node-line-len;
-      background: @node-line-color;
+      height: $node-line-len;
+      background: $node-line-color;
     }
 
     &:after {
       content: '';
       position: absolute;
-      top: @node-line-len;
+      top: $node-line-len;
       left: 50%;
       transform: translateX(-50%);
       width: 0;
       border-style: solid;
       border-width: 8px 6px 4px;
-      border-color: @node-line-color transparent transparent;
+      border-color: $node-line-color transparent transparent;
     }
   }
 }

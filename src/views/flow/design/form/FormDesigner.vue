@@ -278,8 +278,6 @@ function validate() {
 </template>
 
 <style lang="scss" scoped>
-@tool-nav-height: 35px;
-
 .w-form-designer {
   font-size: var(--el-font-size-base);
   color: var(--el-text-color);
@@ -296,12 +294,12 @@ function validate() {
     background-color: white;
 
     .el-tabs__nav {
-      height: calc(@tool-nav-height);
+      height: calc($tool-nav-height);
     }
 
     .el-tabs__item {
       font-size: small;
-      height: calc(@tool-nav-height);
+      height: calc($tool-nav-height);
     }
   }
 }
@@ -311,8 +309,8 @@ function validate() {
   font-size: small;
 
   & > div:first-child {
-    height: @tool-nav-height;
-    line-height: @tool-nav-height;
+    height: $tool-nav-height;
+    line-height: $tool-nav-height;
     text-align: center;
     background: white;
   }
@@ -359,7 +357,7 @@ function validate() {
 
 .w-form-d-toolbar {
   display: flex;
-  height: @tool-nav-height;
+  height: $tool-nav-height;
   align-items: center;
   background: white;
   position: relative;

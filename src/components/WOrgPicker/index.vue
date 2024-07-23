@@ -346,7 +346,7 @@ function getValues() {
   }
 
   &:hover {
-    background-color: @theme-aside-bgc;
+    background-color: $theme-aside-bgc;
   }
 }
 
@@ -361,7 +361,7 @@ function getValues() {
     margin-right: 0;
 
     &:hover {
-      background-color: @theme-aside-bgc;
+      background-color: $theme-aside-bgc;
     }
   }
 

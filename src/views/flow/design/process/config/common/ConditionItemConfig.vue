@@ -2,7 +2,7 @@
 import { computed, ref } from 'vue'
 import WOrgTags from '@/views/wflow/common/WOrgTags.vue'
 import WOrgPicker from '@/views/wflow/common/WOrgPicker.vue'
-import { CompareOptions } from '@/utils/ConditionCompare.js'
+import { CompareOptions } from '@/utils/ConditionCompare'
 
 const props = defineProps({
   type: {

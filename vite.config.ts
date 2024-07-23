@@ -49,6 +49,14 @@ export default ({ mode }: ConfigEnv): UserConfig => {
       }),
       Unocss(),
     ],
+    css: {
+      preprocessorOptions: {
+        scss: {
+          javascriptEnabled: true,
+          additionalData: '@import "./src/styles/globalVariables.scss";',
+        },
+      },
+    },
     // 本地反向代理解决浏览器跨域限制
     server: {
       host: '0.0.0.0',

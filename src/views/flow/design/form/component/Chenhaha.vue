@@ -1,5 +1,5 @@
 <script setup>
-import FormComponentMixin from '../FormComponentMixin.js'
+import FormComponentMixin from '../FormComponentMixin'
 
 defineProps({
   ...FormComponentMixin.props,

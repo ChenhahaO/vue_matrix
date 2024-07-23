@@ -3,7 +3,7 @@ import { VueDraggable } from 'vue-draggable-plus'
 import { computed } from 'vue'
 import FormComponentMixin from '../FormComponentMixin'
 import FormComponent from './FormComponent.vue'
-import { copyField, deepCopy, delField } from '@/utils/GlobalFunc.js'
+import { copyField, deepCopy, delField } from '@/utils/GlobalFunc'
 
 const props = defineProps({
   ...FormComponentMixin.props,
@@ -120,7 +120,7 @@ function copyRow(row) {
   width: 100%;
   height: 100%;
   min-height: 50px;
-  background-color: @main-bgc;
+  background-color: $main-bgc;
 }
 
 .w-tb-op {

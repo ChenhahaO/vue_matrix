@@ -1,62 +1,62 @@
 <script setup lang="ts">
-import { computed, ref } from "vue";
-import { ElMessage } from "element-plus";
-import WDialog from "../../../../common/WDialog.vue";
-import { _formFields } from "../../../FormInterface.js";
-import ConditionItemConfig from "./ConditionItemConfig.vue";
-import { ProcessCondition } from "@/utils/ConditionCompare.js";
+import { computed, ref } from 'vue'
+import { ElMessage } from 'element-plus'
+import { _formFields } from '../../../FormInterface'
+import ConditionItemConfig from './ConditionItemConfig.vue'
+import { ProcessCondition } from '@/utils/ConditionCompare'
 
 const props = defineProps({
   name: String,
   modelValue: {
     type: Object,
     default: () => {
-      return {};
+      return {}
     },
   },
-});
+})
 
-const emit = defineEmits(["update:modelValue", "delete"]);
+const emit = defineEmits(['update:modelValue', 'delete'])
 
 const _value = computed({
   get() {
-    return props.modelValue;
+    return props.modelValue
   },
   set(val) {
-    emit("update:modelValue", val);
+    emit('update:modelValue', val)
   },
-});
+})
 
 // 构建总选项
 const cdOptions = computed(() => {
   // 提取表单字段，过滤不支持的选项
-  return _formFields.value.filter((v: any) => ProcessCondition.FORM[v.type]);
-});
+  return _formFields.value.filter((v: any) => ProcessCondition.FORM[v.type])
+})
 
-const addCdVisible = ref(false);
-const baseCd = ref({} as any);
+const addCdVisible = ref(false)
+const baseCd = ref({} as any)
 
 function addCondition() {
-  addCdVisible.value = true;
+  addCdVisible.value = true
   baseCd.value = {
     group: null,
     type: null,
     symbol: null,
     name: [],
     valueType: null,
-  };
+  }
 }
 
 function addConditionConfirm() {
   if (baseCd.value.type && baseCd.value.symbol) {
-    addCdVisible.value = false;
+    addCdVisible.value = false
     _value.value.conditions.push({
       ...baseCd.value,
       compare: null, // 比较关系
       compareVal: [], // 比较值集合
-    });
-  } else {
-    ElMessage.warning("请选择条件类别");
+    })
+  }
+  else {
+    ElMessage.warning('请选择条件类别')
   }
 }
 </script>
@@ -66,7 +66,9 @@ function addConditionConfirm() {
     <div>
       <el-text>{{ name }}</el-text>
       <div>
-        <el-text style="margin-right: 10px"> 组内条件关系: </el-text>
+        <el-text style="margin-right: 10px">
+          组内条件关系:
+        </el-text>
         <el-switch v-model="_value.logic" active-text="且" inactive-text="或" />
       </div>
       <div>
@@ -119,7 +121,9 @@ function addConditionConfirm() {
         />
         <el-option label="表单" value="FORM" @click="baseCd.name[0] = '表单'" />
       </el-select>
-      <el-text style="margin: 0 10px"> 的 </el-text>
+      <el-text style="margin: 0 10px">
+        的
+      </el-text>
       <el-select
         v-if="baseCd.group === 'INITIATOR'"
         v-model="baseCd.type"
@@ -149,7 +153,9 @@ function addConditionConfirm() {
           "
         />
       </el-select>
-      <el-text v-else type="warning"> 👀请选择左侧类别 </el-text>
+      <el-text v-else type="warning">
+        👀请选择左侧类别
+      </el-text>
     </WDialog>
   </div>
 </template>

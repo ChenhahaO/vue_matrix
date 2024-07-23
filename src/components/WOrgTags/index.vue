@@ -97,7 +97,7 @@ function getAvatar(org) {
     margin: 5px;
     padding:3px 5px;
     border-radius: 15px;
-    background-color: @main-bgc;
+    background-color: $main-bgc;
 
     .w-avatar-user {
       background-color: var(--el-color-primary);

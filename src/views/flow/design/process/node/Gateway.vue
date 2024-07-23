@@ -4,8 +4,8 @@ import { ref } from 'vue'
 import nodeMixin from '../NodeMixin'
 import nodeType, { NodeComponents } from '../ProcessNodes'
 import Node from './base/Node.vue'
-import { reloadNodeId } from '@/utils/ProcessUtil.js'
-import { deepCopy } from '@/utils/GlobalFunc.js'
+import { reloadNodeId } from '@/utils/ProcessUtil'
+import { deepCopy } from '@/utils/GlobalFunc'
 
 const props = defineProps({
   ...nodeMixin.props,
@@ -181,23 +181,23 @@ function validate(errs) {
   display: flex;
   position: relative;
   justify-content: center;
-  background: @main-bgc;
+  background: $main-bgc;
 
   //再画一个横线连接所有支路
   &:before {
     content: '';
-    width: calc(100% - @node-width);
-    background: @node-line-color;
+    width: calc(100% - $node-width);
+    background: $node-line-color;
     position: absolute;
-    height: @node-line-width;
+    height: $node-line-width;
   }
 
   &:after {
     content: '';
-    width: calc(100% - @node-width);
-    background: @node-line-color;
+    width: calc(100% - $node-width);
+    background: $node-line-color;
     position: absolute;
-    height: @node-line-width;
+    height: $node-line-width;
     bottom: 0;
   }
 
@@ -227,9 +227,9 @@ function validate(errs) {
     &:before {
       content: '';
       position: absolute;
-      background: @node-line-color;
+      background: $node-line-color;
       height: 100%;
-      width: @node-line-width;
+      width: $node-line-width;
     }
   }
 
@@ -238,10 +238,10 @@ function validate(errs) {
       //当分支不是偶数时，需要一个遮罩线
       content: '';
       position: absolute;
-      height: @node-line-width;
+      height: $node-line-width;
       width: 50%;
       top: 0;
-      background: @main-bgc;
+      background: $main-bgc;
     }
 
     & > div {
@@ -249,10 +249,10 @@ function validate(errs) {
         //当分支不是偶数时，需要一个遮罩线
         content: '';
         position: absolute;
-        height: @node-line-width;
+        height: $node-line-width;
         width: 50%;
         bottom: 0;
-        background: @main-bgc;
+        background: $main-bgc;
       }
     }
   }

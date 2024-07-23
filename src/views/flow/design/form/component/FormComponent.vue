@@ -1,8 +1,8 @@
 <script setup>
 import { computed } from 'vue'
-import componentMixin from '../FormComponentMixin.js'
-import { FormComponents } from '../FormComponents.js'
-import { copyField, delField } from '@/utils/GlobalFunc.js'
+import componentMixin from '../FormComponentMixin'
+import { FormComponents } from '../FormComponents'
+import { copyField, delField } from '@/utils/GlobalFunc'
 
 const props = defineProps({
   ...componentMixin.props,

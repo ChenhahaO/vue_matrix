@@ -1,6 +1,6 @@
 <script setup>
 import { VueDraggable } from 'vue-draggable-plus'
-import FormComponentMixin from '../FormComponentMixin.js'
+import FormComponentMixin from '../FormComponentMixin'
 
 const props = defineProps({
   ...FormComponentMixin.props,

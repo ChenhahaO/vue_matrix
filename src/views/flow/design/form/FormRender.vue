@@ -1,6 +1,6 @@
 <script setup>
-import { FormComponents } from '../form/FormComponents.js'
-import componentMixin from '../form/FormComponentMixin.js'
+import { FormComponents } from '../form/FormComponents'
+import componentMixin from '../form/FormComponentMixin'
 
 const props = defineProps({
   ...componentMixin.props,
