@@ -1,6 +1,4 @@
 <script setup>
-import { computed, reactive, ref } from 'vue'
-
 const props = defineProps({
   modelValue: {
     type: Array,

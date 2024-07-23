@@ -1,8 +1,5 @@
 <script setup>
-import { computed, ref } from 'vue'
-import FormComponentMixin from '../FormComponentMixin.js'
-import WOrgPicker from '../../../common/WOrgPicker.vue'
-import WOrgTags from '../../../common/WOrgTags.vue'
+import FormComponentMixin from '../FormComponentMixin'
 
 const props = defineProps({
   ...FormComponentMixin.props,

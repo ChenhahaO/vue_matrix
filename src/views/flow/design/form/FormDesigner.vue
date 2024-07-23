@@ -2,13 +2,12 @@
 import { VueDraggable } from 'vue-draggable-plus'
 import { computed, onMounted, ref, watch } from 'vue'
 import { ElMessageBox } from 'element-plus'
-import { FormComponentConfigs, components } from '../form/FormComponents.js'
-import WDialog from '../../common/WDialog.vue'
-import { formJson } from '../FormInterface.js'
-import componentMixin from './FormComponentMixin.js'
+import { FormComponentConfigs, components } from '../form/FormComponents'
+import { formJson } from '../FormInterface'
+import componentMixin from './FormComponentMixin'
 import FormRender from './FormRender.vue'
 import FormComponent from './component/FormComponent.vue'
-import { deepCopy, generateStr } from '@/utils/GlobalFunc.js'
+import { deepCopy, generateStr } from '@/utils/GlobalFunc'
 
 const props = defineProps({
   ...componentMixin.props,

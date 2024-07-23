@@ -12,14 +12,6 @@ defineProps({
     type: Boolean,
     default: false,
   },
-  noPadding: {
-    type: Boolean,
-    default: false,
-  },
-  modelValue: {
-    type: Boolean,
-    default: false,
-  },
   clickClose: {
     type: Boolean,
     default: false,

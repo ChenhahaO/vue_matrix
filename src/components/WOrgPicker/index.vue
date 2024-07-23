@@ -1,8 +1,5 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
-import WDialog from './WDialog.vue'
-import orgApi from '@/api/org.js'
-import { deepCopy } from '@/utils/GlobalFunc.js'
+import { deepCopy } from '@/utils/GlobalFunc'
 
 const props = defineProps({
   title: {
@@ -116,13 +113,13 @@ function toParentDept() {
 
 function doSearch() {
   if (showSearch.value) {
-    loading.value = true
-    orgApi.getUserByName({ userName: search.value }).then((rsp) => {
-      searchData.value = rsp.data
-      reloadStatus(searchData.value)
-    }).finally(() => {
-      loading.value = false
-    })
+    // loading.value = true
+    // orgApi.getUserByName({ userName: search.value }).then((rsp) => {
+    //   searchData.value = rsp.data
+    //   reloadStatus(searchData.value)
+    // }).finally(() => {
+    //   loading.value = false
+    // })
   }
 }
 
