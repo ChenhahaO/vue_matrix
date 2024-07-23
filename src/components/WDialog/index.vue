@@ -82,7 +82,7 @@ const _value = defineModel()
   </el-dialog>
 </template>
 
-<style lang="less">
+<style lang="scss">
 .w-dialog-border {
   .el-dialog__header {
     border-bottom: 1px solid var(--el-border-color);

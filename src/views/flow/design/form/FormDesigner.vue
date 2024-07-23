@@ -278,7 +278,7 @@ function validate() {
   </el-container>
 </template>
 
-<style lang="less" scoped>
+<style lang="scss" scoped>
 @tool-nav-height: 35px;
 
 .w-form-designer {

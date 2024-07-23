@@ -290,7 +290,7 @@ function getValues() {
   </WDialog>
 </template>
 
-<style scoped lang="less">
+<style scoped lang="scss">
 .w-org-picker-span {
   display: flex;
   flex-direction: column;

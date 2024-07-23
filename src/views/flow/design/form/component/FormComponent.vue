@@ -47,7 +47,7 @@ const showActive = computed(() => {
   </div>
 </template>
 
-<style scoped lang="less">
+<style scoped lang="scss">
 .w-border-no {
   border: none !important;
 }

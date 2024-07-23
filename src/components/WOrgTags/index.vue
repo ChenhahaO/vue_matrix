@@ -87,7 +87,7 @@ function getAvatar(org) {
   </div>
 </template>
 
-<style scoped lang="less">
+<style scoped lang="scss">
 .w-org-items {
   display: flex;
   align-items: center;
