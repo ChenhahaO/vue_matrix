@@ -51,7 +51,7 @@ function addOption() {
   </el-form-item>
 </template>
 
-<style lang="less" scoped>
+<style lang="scss" scoped>
 :deep(.w-fd-options) {
   .el-input-group__append, .el-input-group__prepend {
     padding: 0 10px;

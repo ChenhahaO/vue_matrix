@@ -1,6 +1,4 @@
 <script setup>
-import { computed, reactive, ref } from 'vue'
-
 const props = defineProps({
   modelValue: {
     type: Array,
@@ -87,7 +85,7 @@ function getAvatar(org) {
   </div>
 </template>
 
-<style scoped lang="less">
+<style scoped lang="scss">
 .w-org-items {
   display: flex;
   align-items: center;

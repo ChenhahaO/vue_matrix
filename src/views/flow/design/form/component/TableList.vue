@@ -115,7 +115,7 @@ function copyRow(row) {
   </VueDraggable>
 </template>
 
-<style lang="less" scoped>
+<style lang="scss" scoped>
 .w-f-cp-ct {
   width: 100%;
   height: 100%;

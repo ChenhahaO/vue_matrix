@@ -69,7 +69,7 @@ watch(() => props.config.props.number, reloadSpan)
   </el-row>
 </template>
 
-<style lang="less" scoped>
+<style lang="scss" scoped>
 :deep(.w-f-cp-ct) {
   width: 100%;
   min-height: 50px;
