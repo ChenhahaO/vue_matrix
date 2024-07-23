@@ -27,7 +27,7 @@ const state = reactive({
 const { loginForm, loginRules, loading, showCopyright } = toRefs(state)
 
 function handleLogin() {
-  loginFormRef.value?.validate((valid: boolean) => {
+  loginFormRef.value?.validate((valid) => {
     if (valid) {
       state.loading = true
       user

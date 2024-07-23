@@ -25,6 +25,7 @@
     "unocss": "^0.61.5",
     "vite-plugin-qiankun": "^1.0.15",
     "vue": "^3.4.33",
+    "vue-draggable-plus": "^0.5.2",
     "vue-router": "^4.4.0"
   },
   "devDependencies": {
