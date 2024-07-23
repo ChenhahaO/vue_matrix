@@ -1,122 +1,102 @@
-<template>
-  <div class="login-container">
-    <div class="login-box">
-      <div class="login-banner"></div>
-      <el-form
-        ref="loginFormRef"
-        :model="loginForm"
-        :rules="loginRules"
-        class="login-form"
-      >
-        <h3 class="title">vue矩阵</h3>
-        <el-form-item prop="account">
-          <el-input
-            v-model="loginForm.account"
-            placeholder="用户名"
-            auto-complete="on"
-            :prefix-icon="User"
-          />
-        </el-form-item>
-
-        <el-form-item prop="password">
-          <el-input
-            v-model="loginForm.password"
-            type="password"
-            placeholder="密码"
-            auto-complete="on"
-            show-password
-            :prefix-icon="Lock"
-            @keyup.enter="handleLogin"
-          />
-        </el-form-item>
-
-        <el-button
-          :loading="loading"
-          type="primary"
-          style="width: 100%; margin-top: 30px"
-          @click.prevent="handleLogin"
-          >登录
-        </el-button>
-      </el-form>
-    </div>
-    <div v-if="showCopyright == true" class="copyright">
-      <Copyright />
-    </div>
-  </div>
-</template>
-
 <script setup lang="ts">
-import { reactive, ref, toRefs, watch } from 'vue';
-import { ElForm } from 'element-plus';
-import Copyright from '@/components/Copyright/index.vue';
-import { User, Lock } from '@element-plus/icons-vue';
-import router from '@/router';
-import useStore from '@/store';
-import { useRoute } from 'vue-router';
-import { LoginForm } from '@/api/auth/types';
+import { Lock, User } from '@element-plus/icons-vue'
+import router from '@/router'
+import useStore from '@/store'
+import type { LoginForm } from '@/api/auth/types'
 
-const { user } = useStore();
-const route = useRoute();
+const { user } = useStore()
+const route = useRoute()
 
-const loginFormRef = ref(ElForm);
+const loginFormRef = ref<FormInstance>()
 
 const state = reactive({
   redirect: '',
   loginForm: {
     account: '',
-    password: ''
+    password: '',
   } as LoginForm,
   loginRules: {
     account: [{ required: true, message: '请输入用户名', trigger: 'blur' }],
-    password: [{ required: true, message: '请输入密码', trigger: 'blur' }]
+    password: [{ required: true, message: '请输入密码', trigger: 'blur' }],
   },
   loading: false,
   otherQuery: {},
-  showCopyright: true
-});
+  showCopyright: true,
+})
 
-const { loginForm, loginRules, loading, showCopyright } = toRefs(state);
+const { loginForm, loginRules, loading, showCopyright } = toRefs(state)
 
 function handleLogin() {
-  loginFormRef.value.validate((valid: boolean) => {
+  loginFormRef.value?.validate((valid: boolean) => {
     if (valid) {
-      state.loading = true;
+      state.loading = true
       user
         .login(state.loginForm)
         .then(() => {
-          router.push({ path: state.redirect || '/', query: state.otherQuery });
-          state.loading = false;
+          router.push({ path: state.redirect || '/', query: state.otherQuery })
+          state.loading = false
         })
         .catch(() => {
-          state.loading = false;
-        });
-    } else {
-      return false;
+          state.loading = false
+        })
     }
-  });
+    else {
+      return false
+    }
+  })
 }
 
 watch(
   route,
   () => {
-    const query = route.query;
+    const query = route.query
     if (query) {
-      state.redirect = query.redirect as string;
-      state.otherQuery = getOtherQuery(query);
+      state.redirect = query.redirect as string
+      state.otherQuery = getOtherQuery(query)
     }
   },
-  { immediate: true }
-);
+  { immediate: true },
+)
 
 function getOtherQuery(query: any) {
   return Object.keys(query).reduce((acc: any, cur: any) => {
-    if (cur !== 'redirect') {
-      acc[cur] = query[cur];
-    }
-    return acc;
-  }, {});
+    if (cur !== 'redirect')
+      acc[cur] = query[cur]
+
+    return acc
+  }, {})
 }
 </script>
+
+<template>
+  <div class="login-container">
+    <div class="login-box">
+      <div class="login-banner" />
+      <el-form ref="loginFormRef" :model="loginForm" :rules="loginRules" class="login-form">
+        <h3 class="title">
+          汽车业务管理系统
+        </h3>
+        <el-form-item prop="account">
+          <el-input v-model="loginForm.account" placeholder="用户名" auto-complete="on" :prefix-icon="User" />
+        </el-form-item>
+
+        <el-form-item prop="password">
+          <el-input
+            v-model="loginForm.password" type="password" placeholder="密码" auto-complete="on" show-password
+            :prefix-icon="Lock" @keyup.enter="handleLogin"
+          />
+        </el-form-item>
+
+        <el-button :loading="loading" type="primary" style="width: 100%; margin-top: 30px" @click.prevent="handleLogin">
+          登录
+        </el-button>
+      </el-form>
+    </div>
+    <div v-if="showCopyright === true" class="copyright">
+      <Copyright />
+    </div>
+  </div>
+</template>
 
 <style lang="scss" scoped>
 $bg: #2d3a4b;

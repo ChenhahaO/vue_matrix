@@ -4,7 +4,7 @@
   --el-color-primary-dark: #0d84ff;
   // element plus 2.1.0 禁用文本色值和正常文本色值无法区分问题
   --el-text-color-disabled: #ccc;
-  --el-menu-active-color: rgb(231, 244, 255);
+  --el-menu-active-color: rgb(231, 244, 255) !important;
 }
 
 // 覆盖 element-plus 的样式
@@ -54,6 +54,16 @@
   background-color: #5482ee !important;
 }
 
-.el-menu--inline{
+.el-menu--inline {
   background-color: #5482ee !important;
+}
+
+// 解决el-form的label标签有时候是div有时候是label 导致有时label字体不会变粗的情况
+.el-form-item__label {
+  font-weight: 900;
+}
+
+// 隐藏日期时间选择插件下方的【此刻】按钮
+.el-picker-panel__footer > button:first-child {
+  display: none;
 }

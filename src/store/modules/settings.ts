@@ -1,47 +1,47 @@
-import { defineStore } from 'pinia';
-import { SettingState } from './types';
-import defaultSettings from '../../settings';
-import { localStorage } from '@/utils/storage';
+import { defineStore } from 'pinia'
+import defaultSettings from '../../settings'
+import type { SettingState } from './types'
+import { localStorage } from '@/utils/storage'
 
-const { showSettings, tagsView, fixedHeader, sidebarLogo } = defaultSettings;
-const el = document.documentElement;
+const { showSettings, tagsView, fixedHeader, sidebarLogo } = defaultSettings
+const el = document.documentElement
 
 export const useSettingStore = defineStore({
   id: 'setting',
   state: (): SettingState => ({
     theme:
-      localStorage.get('theme') ||
-      getComputedStyle(el).getPropertyValue(`--el-color-primary`),
-    showSettings: showSettings,
+      localStorage.get('theme')
+      || getComputedStyle(el).getPropertyValue(`--el-color-primary`),
+    showSettings,
     tagsView:
       localStorage.get('tagsView') != null
         ? localStorage.get('tagsView')
         : tagsView,
-    fixedHeader: fixedHeader,
-    sidebarLogo: sidebarLogo,
+    fixedHeader,
+    sidebarLogo,
   }),
   actions: {
-    async changeSetting(payload: { key: string; value: any }) {
-      const { key, value } = payload;
+    async changeSetting(payload: { key: string, value: any }) {
+      const { key, value } = payload
       switch (key) {
         case 'theme':
-          this.theme = value;
-          break;
+          this.theme = value
+          break
         case 'fixedHeader':
-          this.fixedHeader = value;
-          break;
+          this.fixedHeader = value
+          break
         case 'tagsView':
-          this.tagsView = value;
-          localStorage.set('tagsView', value);
-          break;
+          this.tagsView = value
+          localStorage.set('tagsView', value)
+          break
         case 'sidebarLogo':
-          this.sidebarLogo = value;
-          break;
+          this.sidebarLogo = value
+          break
         default:
-          break;
+          break
       }
     },
   },
-});
+})
 
-export default useSettingStore;
+export default useSettingStore

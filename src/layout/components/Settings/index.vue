@@ -1,10 +1,51 @@
+<script setup lang="ts">
+import useStore from '@/store'
+
+const { setting } = useStore()
+
+const state = reactive({
+  fixedHeader: setting.fixedHeader,
+  tagsView: setting.tagsView,
+  sidebarLogo: setting.sidebarLogo,
+})
+
+const { fixedHeader, tagsView, sidebarLogo } = toRefs(state)
+
+function themeChange(val: any) {
+  setting.changeSetting({ key: 'theme', value: val })
+}
+
+watch(
+  () => state.fixedHeader,
+  (value) => {
+    setting.changeSetting({ key: 'fixedHeader', value })
+  },
+)
+
+watch(
+  () => state.tagsView,
+  (value) => {
+    setting.changeSetting({ key: 'tagsView', value })
+  },
+)
+
+watch(
+  () => state.sidebarLogo,
+  (value) => {
+    setting.changeSetting({ key: 'sidebarLogo', value })
+  },
+)
+</script>
+
 <template>
   <div class="drawer-container">
-    <h3 class="drawer-title">系统布局配置</h3>
+    <h3 class="drawer-title">
+      系统布局配置
+    </h3>
     <div class="drawer-item">
       <span>主题颜色</span>
       <div style="float: right; height: 26px; margin: -3px 8px 0 0">
-        <theme-picker @change="themeChange" />
+        <ThemePicker @change="themeChange" />
       </div>
     </div>
 
@@ -24,49 +65,6 @@
     </div>
   </div>
 </template>
-
-<script setup lang="ts">
-import { reactive, toRefs, watch } from 'vue';
-
-import ThemePicker from '@/components/ThemePicker/index.vue';
-
-import useStore from '@/store';
-
-const { setting } = useStore();
-
-const state = reactive({
-  fixedHeader: setting.fixedHeader,
-  tagsView: setting.tagsView,
-  sidebarLogo: setting.sidebarLogo,
-});
-
-const { fixedHeader, tagsView, sidebarLogo } = toRefs(state);
-
-function themeChange(val: any) {
-  setting.changeSetting({ key: 'theme', value: val });
-}
-
-watch(
-  () => state.fixedHeader,
-  (value) => {
-    setting.changeSetting({ key: 'fixedHeader', value: value });
-  }
-);
-
-watch(
-  () => state.tagsView,
-  (value) => {
-    setting.changeSetting({ key: 'tagsView', value: value });
-  }
-);
-
-watch(
-  () => state.sidebarLogo,
-  (value) => {
-    setting.changeSetting({ key: 'sidebarLogo', value: value });
-  }
-);
-</script>
 
 <style lang="scss" scoped>
 .drawer-container {

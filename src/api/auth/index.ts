@@ -1,16 +1,11 @@
-import request from '@/utils/request';
-import { AxiosPromise } from 'axios';
-import { LoginForm } from './types';
+import type { AxiosPromise } from 'axios'
+import type { LoginForm } from './types'
+import request from '@/utils/request'
 
-/**
- *
- * @param data {LoginForm}
- * @returns
- */
 export function loginApi(data: LoginForm): AxiosPromise<any> {
   return request({
     url: '/uc/webUserV2/singleLogin',
     method: 'post',
     data,
-  });
+  })
 }

@@ -1,54 +1,39 @@
-import { createApp, Directive } from 'vue';
-import App from './App.vue';
-import router from '@/router';
-
-import { createPinia } from 'pinia';
-
+import type { Directive } from 'vue'
+import { createApp } from 'vue'
+import type { QiankunProps } from 'vite-plugin-qiankun/dist/helper'
+import { qiankunWindow, renderWithQiankun } from 'vite-plugin-qiankun/dist/helper'
+import { createPinia } from 'pinia'
+import { Delete, Search } from '@element-plus/icons-vue'
+import App from './App.vue'
+import router from '@/router'
+import '@unocss/reset/tailwind.css'
+import '@/styles/index.scss'
+import 'uno.css'
+import 'element-plus/dist/index.css'
+import '@/permission'
+import 'virtual:svg-icons-register'
+import * as directive from '@/directive'
 import thirdLogin from '@/utils/thirdLogin'
 
-import ElementPlus from 'element-plus';
-import 'element-plus/theme-chalk/index.css';
-import Pagination from '@/components/Pagination/index.vue';
-import '@/permission';
+let root: any
 
-import 'default-passive-events';
-
-// 引入svg注册脚本
-import 'virtual:svg-icons-register';
-
-// 自定义样式
-import '@/styles/index.scss';
-
-// qiankun
-import {
-  renderWithQiankun,
-  qiankunWindow,
-} from 'vite-plugin-qiankun/dist/helper';
-
-// const app = createApp(App);
-
-// 自定义指令
-import * as directive from '@/directive';
-
-let root: any;
-
-function render(props: any) {
-  const { container } = props;
-  root = createApp(App);
+function render(props: QiankunProps) {
+  const { container } = props
+  root = createApp(App)
   const c = container
     ? container.querySelector('#app')
-    : document.getElementById('app');
+    : document.getElementById('app')
 
-  Object.keys(directive).forEach(key => {
-    root.directive(key, (directive as { [key: string]: Directive })[key]);
-  });
+  Object.keys(directive).forEach((key) => {
+    root.directive(key, (directive as { [key: string]: Directive })[key])
+  })
 
   root
-    .component('Pagination', Pagination)
+    .component('Search', Search)
+    .component('Delete', Delete)
     .use(createPinia())
     .use(router)
-    .use(ElementPlus)
-    .mount(c);
+    .mount(c)
 
   thirdLogin()
 }
@@ -56,23 +41,23 @@ function render(props: any) {
 // qiankun
 renderWithQiankun({
   mount(props) {
-    console.log('vue3sub mount');
-    render(props);
+    console.log('vue3sub mount')
+    render(props)
   },
   bootstrap() {
-    console.log('bootstrap');
+    console.log('bootstrap')
   },
-  unmount(props: any) {
-    console.log('vue3sub unmount');
-    root.unmount();
+  unmount() {
+    console.log('vue3sub unmount')
+    root.unmount()
   },
-  update(props: any) {
-    console.log('vue3sub update');
-    console.log(props);
+  update(props: QiankunProps) {
+    console.log('vue3sub update')
+    console.log(props)
   },
-});
+})
 
 if (!qiankunWindow.__POWERED_BY_QIANKUN__) {
-  console.log('独立访问');
-  render({});
+  console.log('独立访问')
+  render({})
 }

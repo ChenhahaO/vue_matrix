@@ -1,74 +1,68 @@
-<template>
-  <div :class="classObj" class="app-wrapper">
-    <!-- <div
-      v-if="device === 'mobile' && sidebar.opened"
-      class="drawer-bg"
-      @click="handleClickOutside"
-    /> -->
-    <!-- <Sidebar
-      class="sidebar-container"
-      :class="mobileAdaptationcss"
-      :style="{ left: isQiankun ? '60px' : '0px' }"
-    /> -->
-    <div :class="{ hasTagsView: needTagsView }" class="main-container">
-      <!-- <div :class="{ 'fixed-header': fixedHeader }">
-        <navbar />
-        <tags-view v-if="needTagsView" />
-      </div> -->
-      <app-main />
-      <RightPanel v-if="showSettings">
-        <settings />
-      </RightPanel>
-    </div>
-  </div>
-</template>
-
 <script setup lang="ts">
-import { computed, watchEffect } from 'vue';
-import { useWindowSize } from '@vueuse/core';
-import { AppMain, Navbar, Settings, TagsView } from './components/index';
-import Sidebar from './components/Sidebar/index.vue';
-import RightPanel from '@/components/RightPanel/index.vue';
+import { AppMain, Navbar, TagsView } from './components/index'
+import Sidebar from './components/Sidebar/index.vue'
+import useStore from '@/store'
+import { isQiankun } from '@/qiankun'
 
-import useStore from '@/store';
-import { isQiankun } from '@/qiankun';
-const { width } = useWindowSize();
-const WIDTH = isQiankun ? 992 - 60 : 992;
+const { width } = useWindowSize()
+const WIDTH = isQiankun ? 992 - 60 : 992
 
-const { app, setting } = useStore();
+const { app, setting } = useStore()
 
-const sidebar = computed(() => app.sidebar);
-const device = computed(() => app.device);
-const needTagsView = computed(() => setting.tagsView);
-const fixedHeader = computed(() => setting.fixedHeader);
-const showSettings = computed(() => setting.showSettings);
+const sidebar = computed(() => app.sidebar)
+const device = computed(() => app.device)
+const needTagsView = computed(() => setting.tagsView)
+const fixedHeader = computed(() => setting.fixedHeader)
 
 const classObj = computed(() => ({
   hideSidebar: !sidebar.value.opened,
   openSidebar: sidebar.value.opened,
   withoutAnimation: sidebar.value.withoutAnimation,
   mobile: device.value === 'mobile',
-}));
+}))
 
 const mobileAdaptationcss = computed(() => ({
   mobileleft: device.value === 'mobile' && !isQiankun && !sidebar.value.opened,
   qiankunmmobileleft:
     device.value === 'mobile' && isQiankun && !sidebar.value.opened,
-}));
+}))
 
 watchEffect(() => {
   if (width.value < WIDTH) {
-    app.toggleDevice('mobile');
-    app.closeSideBar(true);
-  } else {
-    app.toggleDevice('desktop');
+    app.toggleDevice('mobile')
+    app.closeSideBar(true)
   }
-});
+  else {
+    app.toggleDevice('desktop')
+  }
+})
 
 function handleClickOutside() {
-  app.closeSideBar(false);
+  app.closeSideBar(false)
 }
 </script>
+
+<template>
+  <div :class="classObj" class="app-wrapper">
+    <div
+      v-if="device === 'mobile' && sidebar.opened"
+      class="drawer-bg"
+      @click="handleClickOutside"
+    />
+    <Sidebar
+      class="sidebar-container"
+      :class="mobileAdaptationcss"
+      :style="{ left: isQiankun ? '60px' : '0px' }"
+    />
+    <div :class="{ hasTagsView: needTagsView }" class="main-container">
+      <div :class="{ 'fixed-header': fixedHeader }">
+        <Navbar />
+        <TagsView v-if="needTagsView" />
+      </div>
+      <AppMain />
+    </div>
+  </div>
+</template>
 
 <style lang="scss" scoped>
 @import '@/styles/mixin.scss';

@@ -1,21 +1,6 @@
-<template>
-  <div :class="{ hidden: hidden }" class="pagination-container">
-    <el-pagination
-      :background="background"
-      v-model:current-page="currentPage"
-      v-model:page-size="pageSize"
-      :layout="layout"
-      :page-sizes="pageSizes"
-      :total="total"
-      @size-change="handleSizeChange"
-      @current-change="handleCurrentChange"
-    />
-  </div>
-</template>
-
 <script setup lang="ts">
-import { computed, PropType } from 'vue';
-import { scrollTo } from '@/utils/scroll-to';
+import type { PropType } from 'vue'
+import { scrollTo } from '@/utils/scroll-to'
 
 const props = defineProps({
   total: {
@@ -34,7 +19,7 @@ const props = defineProps({
   pageSizes: {
     type: Array as PropType<number[]>,
     default() {
-      return [20, 50, 100];
+      return [20, 50, 100]
     },
   },
   layout: {
@@ -53,41 +38,49 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
-});
+})
 
-const emit = defineEmits(['update:page', 'update:limit', 'pagination']);
+const emit = defineEmits(['update:page', 'update:limit', 'pagination'])
 
 const currentPage = computed<number | undefined>({
   get: () => props.page,
   set: (value) => {
-    emit('update:page', value);
+    emit('update:page', value)
   },
-});
+})
 
 const pageSize = computed<number | undefined>({
   get() {
-    return props.limit;
+    return props.limit
   },
   set(val) {
-    emit('update:limit', val);
+    emit('update:limit', val)
   },
-});
+})
 
 function handleSizeChange(val: number) {
-  emit('pagination', { page: currentPage, limit: val });
-  if (props.autoScroll) {
-    scrollTo(0, 800);
-  }
+  emit('pagination', { page: currentPage, limit: val })
+  if (props.autoScroll)
+    scrollTo(0, 800)
 }
 
 function handleCurrentChange(val: number) {
-  currentPage.value = val;
-  emit('pagination', { page: val, limit: props.limit });
-  if (props.autoScroll) {
-    scrollTo(0, 800);
-  }
+  currentPage.value = val
+  emit('pagination', { page: val, limit: props.limit })
+  if (props.autoScroll)
+    scrollTo(0, 800)
 }
 </script>
+
+<template>
+  <div :class="{ hidden }" class="pagination-container">
+    <el-pagination
+      v-model:current-page="currentPage" v-model:page-size="pageSize" :background="background"
+      :layout="layout" :page-sizes="pageSizes" :total="total" @size-change="handleSizeChange"
+      @current-change="handleCurrentChange"
+    />
+  </div>
+</template>
 
 <style scoped>
 .pagination-container {

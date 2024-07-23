@@ -1,5 +1,5 @@
-import request from '@/utils/request';
-import { AxiosPromise } from 'axios';
+import type { AxiosPromise } from 'axios'
+import request from '@/utils/request'
 
 /**
  * 登录成功后获取用户信息
@@ -10,7 +10,7 @@ export function getUserInfo(headers: any, data = {}): AxiosPromise<any> {
     method: 'post',
     headers,
     data,
-  });
+  })
 }
 
 /**
@@ -20,5 +20,5 @@ export function getThirdUserInfo(): AxiosPromise<any> {
   return request({
     url: '/third/info',
     method: 'post',
-  });
+  })
 }

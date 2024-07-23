@@ -1,8 +1,8 @@
-<template>
-  <div class="home_bg">hello</div>
-</template>
-
 <script setup lang="ts"></script>
+
+<template>
+  <div class="home_bg" />
+</template>
 
 <style scoped lang="scss">
 .home_bg {

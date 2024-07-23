@@ -2,7 +2,7 @@
   .main-container {
     min-height: 100%;
     transition: margin-left 0.28s;
-    // margin-left: $sideBarWidth;
+    margin-left: $sideBarWidth;
     position: relative;
   }
 
@@ -19,7 +19,7 @@
     z-index: 1001;
     overflow: hidden;
     box-shadow: 10px 0 10px -10px #c7c7c7;
-    
+
     // reset element-ui css
     .horizontal-collapse-transition {
       transition: 0s width ease-in-out, 0s padding-left ease-in-out,
@@ -73,27 +73,26 @@
     .submenu-title-noDropdown,
     .el-sub-menu__title {
       &:hover {
-        background-color: $menuHover 
+        background-color: $menuHover;
       }
     }
-  
+
     & .nest-menu .el-sub-menu > .el-sub-menu__title,
     & .el-sub-menu .el-menu-item {
       min-width: $sideBarWidth !important;
       &:hover {
-        background-color: $subMenuHover 
+        background-color: $subMenuHover;
       }
     }
     & .el-menu--inline {
       background-color: $subMenuBg !important;
     }
-    .el-menu .el-menu--inline{
+    .el-menu .el-menu--inline {
       background-color: $subMenuBg !important;
-   }
+    }
   }
 
   .hideSidebar {
-
     .sidebar-container {
       width: 54px !important;
       .svg-icon {
@@ -109,10 +108,9 @@
       padding: 0 !important;
       position: relative;
 
-   
       .el-tooltip {
         padding: 0 !important;
-    
+
         .svg-icon {
           margin-left: 20px;
         }
@@ -125,7 +123,7 @@
 
     .el-sub-menu {
       overflow: hidden;
-   
+
       & > .el-sub-menu__title {
         padding: 0 !important;
 
@@ -206,7 +204,7 @@
   .el-menu-item {
     &:hover {
       // you can use $subMenuHover
-      background-color: $menuHover 
+      background-color: $menuHover;
     }
   }
 

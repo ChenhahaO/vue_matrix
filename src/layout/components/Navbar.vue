@@ -1,65 +1,16 @@
-<template>
-  <div class="navbar">
-    <hamburger
-      id="hamburger-container"
-      :is-active="sidebar.opened"
-      class="hamburger-container"
-      @toggleClick="toggleSideBar"
-    />
-
-    <breadcrumb id="breadcrumb-container" class="breadcrumb-container" />
-
-    <div class="right-menu">
-      <el-dropdown
-        class="avatar-container right-menu-item hover-effect"
-        trigger="click"
-        v-if="!isQiankun"
-      >
-        <div class="avatar-wrapper">
-          <svg-icon icon-class="user" class="user-avatar" />
-          {{ user.user.account }}
-          <!-- <img :src="avatar + '?imageView2/1/w/80/h/80'" class="user-avatar" /> -->
-          <CaretBottom style="width: 0.6em; height: 0.6em; margin-left: 5px" />
-        </div>
-
-        <template #dropdown>
-          <el-dropdown-menu>
-            <router-link to="/">
-              <el-dropdown-item>首页</el-dropdown-item>
-            </router-link>
-            <!-- <a target="_blank" href="https://github.com/hxrui">
-              <el-dropdown-item>Github</el-dropdown-item>
-            </a> -->
-            <el-dropdown-item divided @click="logout">注销</el-dropdown-item>
-          </el-dropdown-menu>
-        </template>
-      </el-dropdown>
-    </div>
-  </div>
-</template>
 <script setup lang="ts">
-import { computed } from 'vue';
-import { useRoute, useRouter } from 'vue-router';
-import { ElMessageBox } from 'element-plus';
-import SvgIcon from '@/components/SvgIcon/index.vue';
-import useStore from '@/store';
-import { isQiankun } from '@/qiankun';
-// 组件依赖
-import Breadcrumb from '@/components/Breadcrumb/index.vue';
-import Hamburger from '@/components/Hamburger/index.vue';
+import useStore from '@/store'
+import { isQiankun } from '@/qiankun'
 
-// 图标依赖
-import { CaretBottom } from '@element-plus/icons-vue';
+const { app, user, tagsView } = useStore()
 
-const { app, user, tagsView } = useStore();
+const route = useRoute()
+const router = useRouter()
 
-const route = useRoute();
-const router = useRouter();
-
-const sidebar = computed(() => app.sidebar);
+const sidebar = computed(() => app.sidebar)
 
 function toggleSideBar() {
-  app.toggleSidebar();
+  app.toggleSidebar()
 }
 
 function logout() {
@@ -71,14 +22,53 @@ function logout() {
     user
       .logout()
       .then(() => {
-        tagsView.delAllViews();
+        tagsView.delAllViews()
       })
       .then(() => {
-        router.push(`/login?redirect=${route.fullPath}`);
-      });
-  });
+        router.push(`/login?redirect=${route.fullPath}`)
+      })
+  })
 }
 </script>
+
+<template>
+  <div class="navbar">
+    <Hamburger
+      id="hamburger-container"
+      :is-active="sidebar.opened"
+      class="hamburger-container"
+      @toggle-click="toggleSideBar"
+    />
+
+    <Breadcrumb id="breadcrumb-container" class="breadcrumb-container" />
+
+    <div class="right-menu">
+      <el-dropdown
+        v-if="!isQiankun"
+        class="right-menu-item hover-effect mr-3"
+        trigger="click"
+      >
+        <div class="h-[50px] flex items-center justify-center">
+          <SvgIcon icon-class="user" class="!h-[30px] !w-[30px]" />
+          <span> {{ user.user.account }}</span>
+          <div i-carbon:caret-down />
+        </div>
+
+        <template #dropdown>
+          <el-dropdown-menu>
+            <router-link to="/">
+              <el-dropdown-item>首页</el-dropdown-item>
+            </router-link>
+
+            <el-dropdown-item divided @click="logout">
+              注销
+            </el-dropdown-item>
+          </el-dropdown-menu>
+        </template>
+      </el-dropdown>
+    </div>
+  </div>
+</template>
 
 <style lang="scss" scoped>
 ul {
@@ -133,30 +123,6 @@ ul {
 
         &:hover {
           background: rgba(0, 0, 0, 0.025);
-        }
-      }
-    }
-
-    .avatar-container {
-      margin-right: 30px;
-
-      .avatar-wrapper {
-        margin-top: 15px;
-        position: relative;
-
-        .user-avatar {
-          cursor: pointer;
-          width: 25px;
-          height: 25px;
-          border-radius: 10px;
-        }
-
-        .el-icon-caret-bottom {
-          cursor: pointer;
-          position: absolute;
-          right: -20px;
-          top: 25px;
-          font-size: 12px;
         }
       }
     }
